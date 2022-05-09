@@ -12,7 +12,17 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown"
+    "src/**/*.{ts,tsx}": [
+        "eslint --ext .tsx --ext .ts ./src --fix"
+      ],
+      "./src/**": [
+        "prettier --write ."
+      ]
+    },
+    "husky": {
+      "hooks": {
+        "pre-commit": "lint-staged"
+      }
   },
   "dependencies": {
     "@commitlint/cli": "^16.2.4",
