@@ -1,13 +1,15 @@
-
 ## prettier
+
 ```bash
-yarn run format 
+yarn run format
 // or
 yarn run format:fix
 ```
+
 ## lint
+
 ```bash
-yarn run lint 
+yarn run lint
 // or
 yarn run lint:fix
 ```
