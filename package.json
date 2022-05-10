@@ -16,7 +16,8 @@
   },
   "lint-staged": {
     "*.@(ts|tsx)": [
-      "yarn format:fix"
+      "yarn format:fix",
+      "yarn lint"
     ]
   },
   "husky": {
