@@ -15,11 +15,8 @@
     "test:ci": "jest --ci"
   },
   "lint-staged": {
-    "src/**/*.{ts,tsx}": [
-      "eslint --ext .tsx --ext .ts ./src --fix"
-    ],
-    "./src/**": [
-      "prettier --write ."
+    "*.@(ts|tsx)": [
+      "yarn format:fix"
     ]
   },
   "husky": {
