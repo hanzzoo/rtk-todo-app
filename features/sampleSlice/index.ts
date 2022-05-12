@@ -1,11 +1,13 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState = {}
+const initialState = {};
 
 export const sampleSlice = createSlice({
-  name: 'sample',
+  name: "Sampler",
   initialState,
-  reducers: {} 
-})
+  reducers: {},
+});
+
+// TODO: create Actions
 
 export default sampleSlice.reducer;
