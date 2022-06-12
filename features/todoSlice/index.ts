@@ -5,7 +5,7 @@ import { fetchTodoThunk } from "../../pages/hook/fetchTodoApi";
 
 const initialState = {
   todoItems: [],
-};
+} as InitialState;
 
 export const todoSlice = createSlice({
   name: "todo",
