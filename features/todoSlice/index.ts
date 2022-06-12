@@ -1,4 +1,4 @@
-import { createSlice, isAnyOf, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { InitialState } from "../../type";
 import { RootState } from "../../app/store";
 import { fetchTodoThunk, onPostTodoThunk } from "../../pages/hook/fetchTodoApi";
@@ -22,9 +22,8 @@ export const todoSlice = createSlice({
     builder.addCase(fetchTodoThunk.rejected, (state, action) => {
       //console.log(state, action)
     });
-    builder.addCase(onPostTodoThunk.fulfilled, (state, action) => {
-      state.todoItems = [...state.todoItems, action.payload];
-      console.log(state.todoItems);
+    builder.addCase(onPostTodoThunk.fulfilled, (state, { payload }) => {
+      state.todoItems = [...state.todoItems, payload];
     });
   },
 });
