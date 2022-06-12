@@ -19,7 +19,7 @@ const Home: NextPage = () => {
 
     if (inputRef.current !== null && inputRef.current.value !== "") {
       dispatch(onPostTodoThunk(inputRef.current.value)).then(() => {
-        return inputRef.current !== null ? (inputRef.current.value = "") : "";
+        return inputRef.current?.value.trim() && (inputRef.current.value = "");
       });
     }
     return false;
