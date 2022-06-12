@@ -23,7 +23,7 @@ export const todoSlice = createSlice({
       //console.log(state, action)
     });
     builder.addCase(onPostTodoThunk.fulfilled, (state, action) => {
-      state.todoItems = [...state.todoItems, action.payload?.data];
+      state.todoItems = [...state.todoItems, action.payload];
       console.log(state.todoItems);
     });
   },

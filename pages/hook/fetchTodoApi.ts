@@ -15,11 +15,11 @@ const fetchTodoApi = async () => {
 
 const onPostAPI = async (query: string) => {
   try {
-    const postData = await axios.post(`${API_ROOT_URL}/posts`, {
+    const postItem = await axios.post(`${API_ROOT_URL}/posts`, {
       title: query,
       userId: 1,
     });
-    return postData;
+    return postItem.data;
   } catch (error) {
     console.log(error);
   }
