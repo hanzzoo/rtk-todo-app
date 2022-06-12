@@ -13,15 +13,14 @@ export const todoSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchTodoThunk.pending, (state, action: PayloadAction) => {
-      //console.log(state, action)
-    });
+    builder.addCase(
+      fetchTodoThunk.pending,
+      (state, action: PayloadAction) => {}
+    );
     builder.addCase(fetchTodoThunk.fulfilled, (state, action) => {
       state.todoItems = action.payload?.data;
     });
-    builder.addCase(fetchTodoThunk.rejected, (state, action) => {
-      //console.log(state, action)
-    });
+    builder.addCase(fetchTodoThunk.rejected, (state, action) => {});
     builder.addCase(onPostTodoThunk.fulfilled, (state, { payload }) => {
       state.todoItems = [...state.todoItems, payload];
     });
