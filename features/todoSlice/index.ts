@@ -1,10 +1,11 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, isAnyOf, PayloadAction } from "@reduxjs/toolkit";
 import { InitialState } from "../../type";
 import { RootState } from "../../app/store";
-import { fetchTodoThunk } from "../../pages/hook/fetchTodoApi";
+import { fetchTodoThunk, onPostTodoThunk } from "../../pages/hook/fetchTodoApi";
 
 const initialState = {
   todoItems: [],
+  query: {},
 } as InitialState;
 
 export const todoSlice = createSlice({
@@ -16,11 +17,14 @@ export const todoSlice = createSlice({
       //console.log(state, action)
     });
     builder.addCase(fetchTodoThunk.fulfilled, (state, action) => {
-      //console.log(state, action)
       state.todoItems = action.payload?.data;
     });
     builder.addCase(fetchTodoThunk.rejected, (state, action) => {
       //console.log(state, action)
+    });
+    builder.addCase(onPostTodoThunk.fulfilled, (state, action) => {
+      state.todoItems = [...state.todoItems, action.payload?.data];
+      console.log(state.todoItems);
     });
   },
 });

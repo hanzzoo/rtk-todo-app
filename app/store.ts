@@ -9,7 +9,7 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: ["fetch/todo/fulfilled"],
+        ignoredActions: ["fetch/todo/fulfilled", "post/todo/fulfilled"],
       },
     });
   },
