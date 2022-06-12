@@ -18,16 +18,18 @@ const Home: NextPage = () => {
     event.preventDefault();
 
     let inputValue;
-    if (inputElementRef.current !== null) {
+    if (inputElementRef.current !== null && inputElementRef.current.value !== "" ) {
       inputValue = inputElementRef.current.value;
       dispatch(onPostTodoThunk(inputValue));
+      inputValue = "";
     }
+    return false;
   };
 
   console.log(todoItems);
   return (
     <div>
-      <form action="post" onSubmit={(event) => handleSubmit(event)}>
+      <form action="post" onSubmit={handleSubmit}>
         <input ref={inputElementRef} type="text" />
         <button>登録</button>
       </form>
