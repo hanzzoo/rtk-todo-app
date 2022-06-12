@@ -1,26 +1,42 @@
 import type { NextPage } from "next";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, useAppDispatch, useAppSelector } from "../app/store";
-import { fetchTodoThunk } from "./hook/fetchTodoApi";
+import { AppDispatch } from "../app/store";
+import { fetchTodoThunk, onPostTodoThunk } from "./hook/fetchTodoApi";
 import { todoItemSelector } from "../features/todoSlice";
-import { InitialState } from "../type";
 
 const Home: NextPage = () => {
   const dispatch: AppDispatch = useDispatch();
   const { todoItems } = useSelector(todoItemSelector);
+  const inputElementRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     dispatch(fetchTodoThunk());
-  }, []);
+  }, [dispatch]);
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    let inputValue;
+    if (inputElementRef.current !== null) {
+      inputValue = inputElementRef.current.value;
+      dispatch(onPostTodoThunk(inputValue));
+    }
+  };
 
   console.log(todoItems);
   return (
-    <ul>
-      {todoItems.map((item) => (
-        <li key={item.id}>{item.title}</li>
-      ))}
-    </ul>
+    <div>
+      <form action="post" onSubmit={(event) => handleSubmit(event)}>
+        <input ref={inputElementRef} type="text" />
+        <button>登録</button>
+      </form>
+      <ul>
+        {todoItems.map((item, index) => (
+          <li key={index}>{item.title}</li>
+        ))}
+      </ul>
+    </div>
   );
 };
 
