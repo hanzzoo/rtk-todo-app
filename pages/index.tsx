@@ -8,7 +8,7 @@ import { todoItemSelector } from "../features/todoSlice";
 const Home: NextPage = () => {
   const dispatch: AppDispatch = useDispatch();
   const { todoItems } = useSelector(todoItemSelector);
-  const inputElementRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     dispatch(fetchTodoThunk());
@@ -17,20 +17,18 @@ const Home: NextPage = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    let inputValue;
-    if (inputElementRef.current !== null && inputElementRef.current.value !== "" ) {
-      inputValue = inputElementRef.current.value;
-      dispatch(onPostTodoThunk(inputValue));
-      inputValue = "";
+    if (inputRef.current !== null && inputRef.current.value !== "") {
+      dispatch(onPostTodoThunk(inputRef.current.value)).then(() => {
+        return inputRef.current !== null ? (inputRef.current.value = "") : "";
+      });
     }
     return false;
   };
 
-  console.log(todoItems);
   return (
     <div>
       <form action="post" onSubmit={handleSubmit}>
-        <input ref={inputElementRef} type="text" />
+        <input ref={inputRef} type="text" />
         <button>登録</button>
       </form>
       <ul>
