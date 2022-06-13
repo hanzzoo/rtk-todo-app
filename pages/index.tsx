@@ -12,6 +12,7 @@ const Home: NextPage = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    inputRef.current?.focus();
     dispatch(fetchTodoThunk());
   }, [dispatch]);
 
