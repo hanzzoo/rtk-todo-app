@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../app/store";
 import { fetchTodoThunk, onPostTodoThunk } from "./hook/fetchTodoApi";
 import { todoItemSelector } from "../features/todoSlice";
+import { InputForm } from "../pages/components/molecules/InputForm";
 
 const Home: NextPage = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -27,10 +28,11 @@ const Home: NextPage = () => {
 
   return (
     <div>
-      <form action="post" onSubmit={handleSubmit}>
-        <input ref={inputRef} type="text" />
-        <button>登録</button>
-      </form>
+      <InputForm
+        onSubmit={handleSubmit}
+        CurrentRef={inputRef}
+        textContent={"登録"}
+      />
       <ul>
         {todoItems.map((item, index) => (
           <li key={index}>{item.title}</li>
