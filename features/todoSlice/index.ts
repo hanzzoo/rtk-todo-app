@@ -33,7 +33,6 @@ export const todoSlice = createSlice({
     });
     builder.addCase(onPostTodoThunk.pending, (state) => {
       state.isPosting = true;
-      state.todoItems = [];
       state.isError = false;
     });
     builder.addCase(onPostTodoThunk.fulfilled, (state, { payload }) => {
@@ -43,7 +42,6 @@ export const todoSlice = createSlice({
     });
     builder.addCase(onPostTodoThunk.rejected, (state) => {
       state.isPosting = false;
-      state.todoItems = [];
       state.isError = false;
     });
   },
