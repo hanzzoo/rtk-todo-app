@@ -3,9 +3,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import todoReducer from "../features/todoSlice";
 
 export const store = configureStore({
-  reducer: {
-    todoItems: todoReducer,
-  },
+  reducer: todoReducer,
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware({
       serializableCheck: {

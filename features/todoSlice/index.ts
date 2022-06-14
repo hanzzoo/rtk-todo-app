@@ -49,4 +49,7 @@ export const todoSlice = createSlice({
 
 export default todoSlice.reducer;
 
+export const isLoadingSelector = (state: Pick<InitialState, "isLoading">) => state.isLoading;
 export const todoItemSelector = (state: RootState) => state.todoItems;
+export const isErrorSelector = (state: Pick<InitialState, "isError">) => state.isError;
+export const isPostingSelector = (state: Pick<InitialState, "isPosting">) => state.isPosting;

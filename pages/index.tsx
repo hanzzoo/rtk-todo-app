@@ -3,18 +3,24 @@ import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../app/store";
 import { fetchTodoThunk, onPostTodoThunk } from "./hook/fetchTodoApi";
-import { todoItemSelector } from "../features/todoSlice";
+import { isLoadingSelector, todoItemSelector, isErrorSelector, isPostingSelector } from "../features/todoSlice";
 import { InputForm } from "../pages/components/molecules/InputForm";
 
 const Home: NextPage = () => {
   const dispatch: AppDispatch = useDispatch();
-  const { todoItems } = useSelector(todoItemSelector);
+  const isLoading = useSelector(isLoadingSelector);
+  const todoItems = useSelector(todoItemSelector);
+  const isError = useSelector(isErrorSelector);
+  const isPosting = useSelector(isPostingSelector);
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     inputRef.current?.focus();
     dispatch(fetchTodoThunk());
   }, [dispatch]);
+
+  console.log(isLoading)
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -29,6 +35,9 @@ const Home: NextPage = () => {
 
   return (
     <div>
+      {isLoading && <div>...読み込み中</div>}
+      {isError &&  <div>サーバーエラー</div>}
+      {isPosting &&  <div>...投稿中</div>}
       <InputForm
         onSubmit={handleSubmit}
         CurrentRef={inputRef}
