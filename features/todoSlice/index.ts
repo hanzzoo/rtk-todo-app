@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { InitialState } from "../../type";
 import { RootState } from "../../app/store";
 import { fetchTodoThunk, onPostTodoThunk } from "../../pages/hook/fetchTodoApi";
@@ -21,30 +21,30 @@ export const todoSlice = createSlice({
       state.todoItems = [];
       state.isError = false;
     });
-    builder.addCase(fetchTodoThunk.fulfilled, (state, action) => {
+    builder.addCase(fetchTodoThunk.fulfilled, (state, { payload }) => {
       state.isLoading = false;
-      state.todoItems = action.payload?.data;
+      state.todoItems = payload?.data;
       state.isError = false;
     });
-    builder.addCase(fetchTodoThunk.rejected, (state, action) => {
+    builder.addCase(fetchTodoThunk.rejected, (state) => {
       state.isLoading = false;
       state.todoItems = [];
       state.isError = true;
     });
     builder.addCase(onPostTodoThunk.pending, (state) => {
-      state.isLoading = true;
+      state.isPosting = true;
       state.todoItems = [];
-      state.isError = true;
+      state.isError = false;
     });
     builder.addCase(onPostTodoThunk.fulfilled, (state, { payload }) => {
       state.isPosting = false;
       state.todoItems = [...state.todoItems, payload];
       state.isError = false;
     });
-    builder.addCase(onPostTodoThunk.pending, (state) => {
+    builder.addCase(onPostTodoThunk.rejected, (state) => {
       state.isPosting = false;
       state.todoItems = [];
-      state.isError = true;
+      state.isError = false;
     });
   },
 });
