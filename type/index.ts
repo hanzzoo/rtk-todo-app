@@ -10,6 +10,9 @@ export interface TodoItems {
 export type PostItem = Partial<Omit<TodoItems, "id">>;
 
 export interface InitialState {
+  isLoading: boolean;
+  isError: boolean;
+  isPosting: boolean;
   todoItems: TodoItems[];
   query: PostItem;
 }
